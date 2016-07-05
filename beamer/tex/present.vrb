@@ -1,0 +1,14 @@
+
+% must be tuned
+    \frametitle{GBRT hyperparameters}
+    \begin{verbatim}
+    alpha = 0.9
+    learning_rate = 0.01*
+    loss = `ls',
+    max_depth = 4*
+    max_features = None*
+    min_samples_leaf = 4*
+    min_samples_split = 1
+    n_estimators=1000
+    subsample = 0.75
+    \end{verbatim}
