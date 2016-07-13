@@ -5,7 +5,7 @@
 \hypersetup{ colorlinks, citecolor=blue, linkcolor=red}
 \usetheme{boxes}
 \setbeamercovered{invisible}
-\usecolortheme{beaver}
+\usecolortheme{crane}
 \setbeamertemplate{navigation symbols}{}
 \usepackage{graphicx}
 \beamertemplatenavigationsymbolsempty
@@ -76,7 +76,7 @@ Galway, Ireland\\
         \item random sampling (n = 50 to 100) from commercial vessels;
         \item pelagic trawling;
         \item age and weight-at-length;
-        \item total sample size 145 000;
+        \item total sample size 50,000;
     \end{itemize}
 \begin{center}
 {\includegraphics[scale=0.4]{../fig/trawl} }
@@ -190,15 +190,15 @@ where $\epsilon$ is a shrinkage.  %scales the contribution of each weak learner 
     \frametitle{GBRT hyperparameters}
     \begin{itemize}
 % n_estimators and learning_rate are two regularisation parameters, each one control the degree of fit, and thus the best value for the other one
-        \item \alert{number of iterations  = 1000; }
+        \item \alert{number of iterations  = 500; }
 %number of weak learners
 % this parameter strongly interacts with the learning rate
 % Smaller values of learning_rate require larger numbers of weak learners to maintain a constant training error. 
 % Empirical evidence suggests that small values of learning_rate favor better test error. 
 % hastie2009 suggests to set the learning rate to a small constant (e.g. learning_rate <= 0.1) and choose n_estimators by early stopping. 
-        \item \alert{shrinkage (learning rate) = 0.01; }
+        \item \alert{shrinkage (learning rate) = 0.05; }
 %The parameter \nu is also called the learning rate because it scales the step length the the gradient descent procedure
-        \item max tree depth = 4; 
+        \item max tree depth = 6; 
 % the degree of feature interaction
 %Work best with shallow decision trees = weak models
 %The size of the regression tree base learners defines the level of variable interactions that can be captured by the gradient boosting model. 
@@ -222,26 +222,27 @@ where $\epsilon$ is a shrinkage.  %scales the contribution of each weak learner 
 % Plots like these can be used to determine the optimal number of trees by early stopping
 % mse levels off
 
-
 \begin{frame}
-\frametitle{Deviance}
+\frametitle{Model estimation}
     \vspace{-1cm}
 \begin{columns}[c]    
-\column{.55\textwidth}
+\column{.65\textwidth}
     \centering
 \begin{figure}
-\includegraphics[scale=0.35]{../fig/devianceCS}
+\includegraphics[scale=0.55]{../fig/devianceCS-present}
 \end{figure}
-\column{.4\textwidth}
+\column{.35\textwidth}
   \centering
   \begin{itemize}
-      \item MSE: 4.09
-      \item $R^2$ test: 23.04
-      \item $R^2$ train: 22.76
+      \item MSE: 1.31
+      \item $R^2$ train: 54.5\%
+      \item $R^2$ test: 51.7\%
+      \item $R^2$ val: 52.6\%
   \end{itemize}
 \end{columns}
 \centering Low $R^2$ due to individual variability 
 \end{frame}
+
 
 % When interpreting a model, the first question usually is: what are those important features and how do they contributing in predicting the target response?
 % Often features do not contribute equally to predict the target response; in many situations the majority of the features are in fact irrelevant. 
@@ -251,8 +252,18 @@ where $\epsilon$ is a shrinkage.  %scales the contribution of each weak learner 
 % This notion of importance can be extended to decision tree ensembles by simply averaging the feature importance of each tree
 
 \begin{frame}
+    \frametitle{True vs Predicted}
+\begin{figure}
+    \centering
+\includegraphics[scale=0.75]{../fig/true-pred-present}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
     \frametitle{Variable Importance Plot}
-\includegraphics[scale=0.55]{../fig/featureCS}
+\includegraphics[scale=0.55]{../fig/featureCS-present}
 \end{frame}
 
 % Partial dependence plots (PDP) show the dependence between the target response and a set of (‘target’) variables (features), marginalizing over the values of all other features (the ‘complement’ features). 
@@ -262,17 +273,16 @@ where $\epsilon$ is a shrinkage.  %scales the contribution of each weak learner 
 
 \begin{frame}
 \frametitle{Partial Dependence Plots}
-\includegraphics[scale=0.47]{../fig/partdepCS}
+\includegraphics[scale=0.47]{../fig/partdepCS-present}
 \end{frame}
 % sst and totaln have a strong interaction effect, whereas totaln and recr not as much
 
 \begin{frame}
 \frametitle{Conclusions}
 \begin{itemize}
-    \item <+-| alert@+> sea surface temperature, total stock size and recruitment are three most importans features;
-    \item <+-| alert@+> sea surface temperature above 14 degrees negatively relates to fish length, whereas total stock biomass and recruitment are invariant;
-    \item <+-| alert@+> there is a high degree of interaction between sea surface temperature and total stock size;
-    \item <+-| alert@+> food availability shows low importance; 
+    \item <+-| alert@+> trend, sea surface temperature and food availability are three most importans features;
+    \item <+-| alert@+> sea surface temperature above 14 degrees negatively relates to fish length, whereas food availability is invariant; %food is not a limiting factor
+    \item <+-| alert@+> there is a high degree of interaction between all features;
     \item <+-| alert@+> not a cause-effect relationship, but a relative importance of the variables;
         %low R2 due to individual variability or missing variables..
 \end{itemize}
