@@ -243,13 +243,7 @@ where $\epsilon$ is a shrinkage.  %scales the contribution of each weak learner 
 \centering Low $R^2$ due to individual variability 
 \end{frame}
 
-
-% When interpreting a model, the first question usually is: what are those important features and how do they contributing in predicting the target response?
-% Often features do not contribute equally to predict the target response; in many situations the majority of the features are in fact irrelevant. 
-
-% any regression trees method intrinsically perform feature selection by selecting appropriate split points. 
-% This information can be used to measure the importance of each feature; the basic idea is: the more often a feature is used in the split points of a tree the more important that feature is. 
-% This notion of importance can be extended to decision tree ensembles by simply averaging the feature importance of each tree
+% lets see how this corresonds to the predicted values, here we plot true length of the fish against predicted length. We observe a reasonable fit, but explanatory power of the model is still slightly over 50%. % The best predictions are made around  mean values.
 
 \begin{frame}
     \frametitle{True vs Predicted}
@@ -259,6 +253,12 @@ where $\epsilon$ is a shrinkage.  %scales the contribution of each weak learner 
 \end{figure}
 \end{frame}
 
+% When interpreting a model, the first question usually is: what are those important features and how do they contributing in predicting the target response?
+% Often features do not contribute equally to predict the target response; in many situations the majority of the features are in fact irrelevant. 
+
+% any regression trees method intrinsically perform feature selection by selecting appropriate split points. 
+% This information can be used to measure the importance of each feature; the basic idea is: the more often a feature is used in the split points of a tree the more important that feature is. 
+% This notion of importance can be extended to decision tree ensembles by simply averaging the feature importance of each tree
 
 
 \begin{frame}
@@ -275,7 +275,6 @@ where $\epsilon$ is a shrinkage.  %scales the contribution of each weak learner 
 \frametitle{Partial Dependence Plots}
 \includegraphics[scale=0.47]{../fig/partdepCS-present}
 \end{frame}
-% sst and totaln have a strong interaction effect, whereas totaln and recr not as much
 
 \begin{frame}
 \frametitle{Conclusions}
@@ -284,7 +283,6 @@ where $\epsilon$ is a shrinkage.  %scales the contribution of each weak learner 
     \item <+-| alert@+> sea surface temperature above 14 degrees negatively relates to fish length, whereas food availability is invariant; %food is not a limiting factor
     \item <+-| alert@+> there is a high degree of interaction between all features;
     \item <+-| alert@+> not a cause-effect relationship, but a relative importance of the variables;
-        %low R2 due to individual variability or missing variables..
 \end{itemize}
 \end{frame}
 
