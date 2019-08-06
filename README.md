@@ -7,3 +7,6 @@ This research was supported by a grant from the Irish Environmental Protection A
 
 Presentation on youtube:
 https://www.youtube.com/watch?v=JijkETEnfO4
+
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lyashevska/gbrt-herring-length/master)
